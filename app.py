@@ -1,5 +1,6 @@
 import streamlit as st
-import pandas as pd 
+import pandas as pd
+import plotly.express as px
 
 from PIL import Image
 
@@ -105,3 +106,33 @@ with col2:
         })
 
         st.dataframe(df)
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.header('Can you also show plots?')
+    st.write('Yes, you can show plots in streamlit by using the st.plotly_chart() function')
+
+with col2:
+    with st.expander('Show me the code'):
+        st.code(
+            """
+            import plotly.express as px
+
+            df = pd.DataFrame({
+                'name': ['John', 'Jane', 'Doe'],
+                'age': [25, 30, 35]
+            })
+
+            fig = px.bar(df, x='name', y='age')
+            st.plotly_chart(fig)
+            """
+        )
+
+        df = pd.DataFrame({
+            'name': ['John', 'Jane', 'Doe'],
+            'age': [25, 30, 35]
+        })
+
+        fig = px.bar(df, x='name', y='age')
+        st.plotly_chart(fig)
